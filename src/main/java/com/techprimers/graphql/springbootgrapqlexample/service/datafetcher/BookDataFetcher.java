@@ -18,6 +18,6 @@ public class BookDataFetcher implements DataFetcher<Book>{
 
         String isn = dataFetchingEnvironment.getArgument("id");
 
-        return bookRepository.findOne(isn);
+        return bookRepository.findById(isn).get();
     }
 }

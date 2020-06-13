@@ -9,10 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Setter
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
 @Table
 @Entity
 public class Book {
@@ -23,4 +23,5 @@ public class Book {
     private String publisher;
     private String[] authors;
     private String publishedDate;
+
 }
