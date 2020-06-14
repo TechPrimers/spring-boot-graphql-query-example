@@ -16,8 +16,9 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
@@ -43,9 +44,12 @@ public class GraphQLService {
         loadDataIntoHSQL();
 
         // get the schema
-        File schemaFile = resource.getFile();
+        String text = new BufferedReader(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8))
+                .lines()
+                .collect(Collectors.joining("\n"));
+
         // parse schema
-        TypeDefinitionRegistry typeRegistry = new SchemaParser().parse(schemaFile);
+        TypeDefinitionRegistry typeRegistry = new SchemaParser().parse(text);
         RuntimeWiring wiring = buildRuntimeWiring();
         GraphQLSchema schema = new SchemaGenerator().makeExecutableSchema(typeRegistry, wiring);
         graphQL = GraphQL.newGraphQL(schema).build();
