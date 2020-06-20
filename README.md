@@ -42,3 +42,16 @@ Update: Upgraded to Java 11 and Graph QL to 5+ version dependency
    }
  }
 ```
+
+- Mutation adding new book
+```
+mutation{
+    newBook(
+        isn: "1001"
+        title: "GraphQL"
+        publisher: "Smit Shah"
+    ){
+        isn
+    }
+}
+```

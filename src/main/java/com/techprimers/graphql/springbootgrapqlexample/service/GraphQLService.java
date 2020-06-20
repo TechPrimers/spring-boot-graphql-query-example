@@ -2,9 +2,11 @@ package com.techprimers.graphql.springbootgrapqlexample.service;
 
 import com.techprimers.graphql.springbootgrapqlexample.model.Book;
 import com.techprimers.graphql.springbootgrapqlexample.repository.BookRepository;
+import com.techprimers.graphql.springbootgrapqlexample.service.datafetcher.AddBookFetcher;
 import com.techprimers.graphql.springbootgrapqlexample.service.datafetcher.AllBooksDataFetcher;
 import com.techprimers.graphql.springbootgrapqlexample.service.datafetcher.BookDataFetcher;
 import graphql.GraphQL;
+import graphql.schema.DataFetcher;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
@@ -35,6 +37,8 @@ public class GraphQLService {
     private AllBooksDataFetcher allBooksDataFetcher;
     @Autowired
     private BookDataFetcher bookDataFetcher;
+    @Autowired
+    private AddBookFetcher addBookFetcher;
 
     // load schema at application start up
     @PostConstruct
@@ -80,6 +84,8 @@ public class GraphQLService {
                 .type("Query", typeWiring -> typeWiring
                         .dataFetcher("allBooks", allBooksDataFetcher)
                         .dataFetcher("book", bookDataFetcher))
+                .type("Mutation", typeWiring -> typeWiring
+                        .dataFetcher("newBook", addBookFetcher))
                 .build();
     }
 

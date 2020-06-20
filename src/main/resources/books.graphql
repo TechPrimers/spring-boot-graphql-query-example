@@ -1,10 +1,10 @@
-schema {
- query: Query
-}
-
 type Query {
  allBooks: [Book]
  book(id: String): Book
+}
+
+type Mutation {
+ newBook(isn: String, title: String, publisher: String) : Book!
 }
 
 type Book {
