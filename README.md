@@ -1,6 +1,6 @@
 # Spring Boot with GraphQL Query Example
 
-Update: Upgraded to Java 11 and Graph QL to 5+ version dependency
+Update: Upgraded to Java 17, Spring Boot to 3+ and Graph QL to 5+ version dependency
 
 ## Book Store
 - `/rest/books` is the REST resource which can fetch Books information
